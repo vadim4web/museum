@@ -7,14 +7,23 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Forum&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <!-- Normalize -->
+  <link rel="stylesheet" href="styles/normalize.css" />
+
+  <!-- Base (mobile-first) styles -->
+  <link rel="stylesheet" href="styles/base.css" />
+
+  <!-- Media-specific styles -->
+  <link rel="stylesheet" href="styles/tablet.css" media="screen and (min-width: 768px)" />
+  <link rel="stylesheet" href="styles/desktop.css" media="screen and (min-width: 1024px)" />
+  <link rel="stylesheet" href="styles/hd.css" media="screen and (min-width: 1920px)" />
 </head>
 <body>
   <div id="dev"></div>
   <header id="#top">
     <div class="content header">
       <a href="/">
-        <img src="logo.svg" alt="Louvre logo">
+        <img src="assets/logo.svg" alt="Louvre logo">
         <span class="sr-only">Go to homepage</span>
       </a>
       <nav class="nav">
@@ -33,7 +42,61 @@
   <main>
     <section id="welcome">
       <div class="content">
-        <h2>Welcome</h2>
+        <div class="cta">
+          <h1>
+            Welcome
+            <br>
+            to the Louvre
+          </h1>
+
+          <p>From the castle to the museum</p>
+
+          <a
+            href="https://www.google.com/maps/@48.8618159,2.3366818,3a,75y,81.55h,73.4t/data=!3m7!1e1!3m5!1sAF1QipOVxZQuSy3Bx9T_HpH_7FtBHDTXvI6SF-A10ocT!2e10!3e12!7i5472!8i2736" target="_blank"
+            rel="noopener noreferrer"
+          >Discover the Louvre</a>
+        </div>
+
+        <div id="welcome-slider" class="slider" data-active="0">
+          <div class="slider-view">
+            <div class="slider-view-slide">
+              <img src="assets/images/welcome/1.webp" alt="Slide 1">
+            </div>
+            <div class="slider-view-slide">
+              <img src="assets/images/welcome/2.webp" alt="Slide 2">
+            </div>
+            <div class="slider-view-slide">
+              <img src="assets/images/welcome/3.webp" alt="Slide 3">
+            </div>
+            <div class="slider-view-slide">
+              <img src="assets/images/welcome/4.webp" alt="Slide 4">
+            </div>
+            <div class="slider-view-slide">
+              <img src="assets/images/welcome/5.webp" alt="Slide 5">
+            </div>
+          </div>
+
+          <div class="slider-navigation">
+            <div class="count">
+              <span id="current-slide">01</span>
+              <span>|</span>
+              <span>05</span>
+            </div>
+
+            <div class="thumbs">
+              <span data-index="0" class="active"></span>
+              <span data-index="1"></span>
+              <span data-index="2"></span>
+              <span data-index="3"></span>
+              <span data-index="4"></span>
+            </div>
+
+            <div class="arrows">
+              <button id="slider-prev">&larr;</button>
+              <button id="slider-next">&rarr;</button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
     <section id="visiting">
@@ -71,19 +134,32 @@
   <footer>
     <div class="content">
       <a href="#top">
-        <img src="logo.svg" alt="Louvre logo">
+        <img src="assets/logo.svg" alt="Louvre logo">
         <span class="sr-only">Go to top of page</span>
       </a>
       <p>&copy; 2025 Museum</p>
     </div>
   </footer>
 
-  <script>
+  <script type="module">
+    import { initSlider } from './scripts/slider.js';
+
     function setSize() {
-      document.getElementById('dev').innerText = window.innerWidth + 'x' + window.innerHeight
+      document.getElementById('dev').innerText = window.innerWidth + 'x' + window.innerHeight;
     }
-    window.onload = setSize
-    window.addEventListener('resize', setSize)
+
+    window.onload = () => {
+      setSize();
+
+      // Initialize slider with autoplay
+      initSlider('welcome-slider', {
+        slideWidth: 1000,
+        autoplay: true,
+        interval: 5000 // optional: change interval time here
+      });
+    };
+
+    window.addEventListener('resize', setSize);
   </script>
 </body>
 </html>

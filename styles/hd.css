@@ -1,0 +1,61 @@
+/* hd.css */
+@media (min-width: 1920px) {
+  .content {
+    width: 1440px;
+  }
+
+  .header {
+    height: 150px;
+  }
+
+  .nav-list {
+    font-size: 22px;
+    line-height: 26px;
+    letter-spacing: 2px;
+    gap: 55px;
+  }
+
+  #welcome {
+    height: 810px;
+  }
+
+  h1 {
+    font-size: 80px;
+    line-height: 90px;
+    letter-spacing: 5px;
+  }
+
+  .cta {
+    top: 150px;
+  }
+
+  .cta p {
+    font-size: 28px;
+    line-height: 33px;
+    letter-spacing: 2px;
+  }
+
+  .cta a {
+    top: 313px;
+    width: 360px;
+    height: 75px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    font-size: 22px;
+    letter-spacing: 2px;
+  }
+
+  #welcome-slider,
+  .slider-view-slide,
+  .slider-view-slide img {
+    width: 1000px;
+  }
+
+  .slider-view {
+    height: 750px;
+    width: 5000px;
+  }
+}
