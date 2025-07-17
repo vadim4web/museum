@@ -67,4 +67,12 @@
     width: 600px;
     height: 120px;
   }
+
+  footer {
+    font-size: 22px;
+  }
+
+  footer .bottom {
+    height: 124px;
+  }
 }

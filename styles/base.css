@@ -17,12 +17,12 @@
   --font-gold: #9D8665;
   --font-gold-dimmed: #7E6C51;
   --golden: #D2B183;
-
-  font-family: "Roboto", sans-serif;
-  font-weight: 100;
+  --gray: #666666;
 }
 
 body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
   margin: 0;
   padding: 0;
   display: flex;
@@ -82,6 +82,7 @@ a {
 }
 
 .content {
+  width: 100%;
   margin-inline: auto;
 }
 
@@ -243,6 +244,82 @@ footer {
 
 .arrows button:hover svg path {
   fill: var(--font-gold);
+}
+
+footer {
+  position: relative;
+  font-size: 22px;
+  letter-spacing: 2px;
+}
+
+footer .top {
+  display: flex;
+  gap: 100px;
+  padding: 75px 0 50px;
+  justify-content: space-between;
+}
+
+footer .top .links {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+footer .top .nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-content: center;
+  justify-items: center;
+  gap: 150px;
+}
+
+footer .top .nav-list li .sub-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+footer .top .social-media {
+  display: flex;
+  align-items: end;
+  gap: 25px;
+}
+
+footer .top .social-media a svg * {
+  transition: stroke 0.5s ease, fill 0.5s ease;
+  -webkit-transition: stroke 0.5s ease, fill 0.5s ease;
+  -moz-transition: stroke 0.5s ease, fill 0.5s ease;
+  -ms-transition: stroke 0.5s ease, fill 0.5s ease;
+  -o-transition: stroke 0.5s ease, fill 0.5s ease;
+}
+
+footer .top .social-media a:hover svg path {
+  fill: var(--font-gold);
+}
+
+footer .top .social-media a:hover svg rect {
+  stroke: var(--font-gold-dimmed);
+}
+
+footer::after {
+  content: "";
+  position: absolute;
+  bottom: 124px;
+  height: 3px;
+  width: 100%;
+  left: 0;
+  right: 0;
+  background: var(--gray);
+}
+
+footer .bottom {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .sr-only {
