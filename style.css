@@ -1,0 +1,31 @@
+:root {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Base styles — mobile (420px and below) */
+
+/* 768px – Tablet Portrait */
+@media (min-width: 768px) {}
+
+/* 1024px – Tablet Landscape */
+@media (min-width: 1024px) {}
+
+/* 1920px – Desktop Full HD */
+@media (min-width: 1920px) {}
