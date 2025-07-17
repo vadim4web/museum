@@ -10,46 +10,80 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#welcome">Welcome</a></li>
-        <li><a href="#visiting">Visiting</a></li>
-        <li><a href="#explore">Explore</a></li>
-        <li><a href="#video">Video</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#tickets">Tickets</a></li>
-        <li><a href="#contacts">Contacts</a></li>
-      </ul>
-    </nav>
+  <div id="dev"></div>
+  <header id="#top">
+    <div class="content header">
+      <a href="/">
+        <img src="logo.svg" alt="Louvre logo">
+        <span class="sr-only">Go to homepage</span>
+      </a>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a class="nav-list-link" href="#visiting">Visiting</a></li>
+          <li><a class="nav-list-link" href="#explore">Explore</a></li>
+          <li><a class="nav-list-link" href="#video">Video</a></li>
+          <li><a class="nav-list-link" href="#gallery">Gallery</a></li>
+          <li><a class="nav-list-link" href="#tickets">Tickets</a></li>
+          <li><a class="nav-list-link" href="#contacts">Contacts</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <main>
     <section id="welcome">
-      <h2>Welcome</h2>
+      <div class="content">
+        <h2>Welcome</h2>
+      </div>
     </section>
     <section id="visiting">
-      <h2>Visiting</h2>
+      <div class="content">
+        <h2>Visiting</h2>
+      </div>
     </section>
     <section id="explore">
-      <h2>Explore</h2>
+      <div class="content">
+        <h2>Explore</h2>
+      </div>
     </section>
     <section id="video">
-      <h2>Video</h2>
+      <div class="content">
+        <h2>Video</h2>
+      </div>
     </section>
     <section id="gallery">
-      <h2>Gallery</h2>
+      <div class="content">
+        <h2>Gallery</h2>
+      </div>
     </section>
     <section id="tickets">
-      <h2>Tickets</h2>
+      <div class="content">
+        <h2>Tickets</h2>
+      </div>
     </section>
     <section id="contacts">
-      <h2>Contacts</h2>
+      <div class="content">
+        <h2>Contacts</h2>
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 Museum</p>
+    <div class="content">
+      <a href="#top">
+        <img src="logo.svg" alt="Louvre logo">
+        <span class="sr-only">Go to top of page</span>
+      </a>
+      <p>&copy; 2025 Museum</p>
+    </div>
   </footer>
+
+  <script>
+    function setSize() {
+      document.getElementById('dev').innerText = window.innerWidth + 'x' + window.innerHeight
+    }
+    window.onload = setSize
+    window.addEventListener('resize', setSize)
+  </script>
 </body>
 </html>
