@@ -41,7 +41,7 @@
 
   <main>
     <section id="welcome">
-      <div class="content">
+      <div class="content" id="welcome-slider-container">
         <div class="cta">
           <h1>
             Welcome
@@ -75,26 +75,34 @@
               <img src="assets/images/welcome/5.webp" alt="Slide 5">
             </div>
           </div>
+        </div>
 
-          <div class="slider-navigation">
-            <div class="count">
-              <span id="current-slide">01</span>
-              <span>|</span>
-              <span>05</span>
-            </div>
+        <div class="slider-navigation">
+          <div class="count">
+            <span id="current-slide">01</span>
+            <span>&nbsp;|&nbsp;</span>
+            <span>05</span>
+          </div>
 
-            <div class="thumbs">
-              <span data-index="0" class="active"></span>
-              <span data-index="1"></span>
-              <span data-index="2"></span>
-              <span data-index="3"></span>
-              <span data-index="4"></span>
-            </div>
+          <div class="thumbs">
+            <span data-index="0" class="active"></span>
+            <span data-index="1"></span>
+            <span data-index="2"></span>
+            <span data-index="3"></span>
+            <span data-index="4"></span>
+          </div>
 
-            <div class="arrows">
-              <button id="slider-prev">&larr;</button>
-              <button id="slider-next">&rarr;</button>
-            </div>
+          <div class="arrows">
+            <button id="slider-prev">
+              <svg width="30" height="8" viewBox="0 0 30 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.72254 8C3.90173 6.31339 1.99422 5.08262 0 4.30769V3.69231C1.99422 2.89459 3.90173 1.66382 5.72254 0H7.23988C6.37283 1.4359 5.53468 2.52991 4.72543 3.28205H30V4.71795H4.72543C5.53468 5.47009 6.37283 6.5641 7.23988 8H5.72254Z"/>
+              </svg>
+            </button>
+            <button id="slider-next">
+              <svg width="30" height="8" viewBox="0 0 30 8" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(180deg);">
+                <path d="M5.72254 8C3.90173 6.31339 1.99422 5.08262 0 4.30769V3.69231C1.99422 2.89459 3.90173 1.66382 5.72254 0H7.23988C6.37283 1.4359 5.53468 2.52991 4.72543 3.28205H30V4.71795H4.72543C5.53468 5.47009 6.37283 6.5641 7.23988 8H5.72254Z"/>
+              </svg>
+            </button>
           </div>
         </div>
       </div>
@@ -152,7 +160,7 @@
       setSize();
 
       // Initialize slider with autoplay
-      initSlider('welcome-slider', {
+      initSlider('welcome-slider', 'welcome-slider-container', {
         slideWidth: 1000,
         autoplay: true,
         interval: 5000 // optional: change interval time here

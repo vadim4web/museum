@@ -12,6 +12,7 @@
   scroll-behavior: smooth;
   --white: #FFFFFF;
   --bg-dark: #030303;
+  --bg-dark50: #03030380;
   --dark-red: #710707;
   --font-gold: #9D8665;
   --font-gold-dimmed: #7E6C51;
@@ -95,6 +96,7 @@ footer {
 
 .cta {
   position: relative;
+  z-index: 1;
 }
 
 .cta p {
@@ -120,8 +122,9 @@ footer {
   background: var(--font-gold);
 }
 
-#welcome {
+#welcome .content {
   position: relative;
+  height: 100%;
 }
 
 #welcome-slider {
@@ -129,6 +132,15 @@ footer {
   right: 0;
   top: 0;
   overflow: hidden;
+}
+
+#welcome-slider::after {
+  width: 100%;
+  height: 100%;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .slider-view {
@@ -155,41 +167,77 @@ footer {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top center;
 }
 
 .slider-navigation {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-top: 1rem;
-  position: relative;
+  justify-content: center;
+  gap: 40px;
+  position: absolute;
   z-index: 1;
+  bottom: 0;
+  right: 0;
+  background: var(--bg-dark);
+}
+
+.slider-navigation .count {
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.slider-navigation .thumbs {
+  display: flex;
+  gap: 24px;
 }
 
 .thumbs span {
   display: inline-block;
-  width: 12px;
-  height: 12px;
-  background: #888;
-  border-radius: 50%;
+  width: 19px;
+  height: 19px;
+  background: var(--white);
   margin: 0 4px;
   cursor: pointer;
-  opacity: 0.5;
-  transition: opacity 0.3s ease;
+  transition: background 0.5s ease;
+  -webkit-transition: background 0.5s ease;
+  -moz-transition: background 0.5s ease;
+  -ms-transition: background 0.5s ease;
+  -o-transition: background 0.5s ease;
 }
 
 .thumbs span.active {
-  background: #fff;
-  opacity: 1;
+  background: var(--golden);
+}
+
+.thumbs span:hover {
+  background: var(--font-gold);
 }
 
 .arrows button {
   background: none;
-  border: 1px solid #fff;
-  color: #fff;
+  border: none;
   padding: 4px 12px;
   font-size: 18px;
   cursor: pointer;
+}
+
+.slider-navigation .arrows {
+  display: flex;
+  gap: 18px;
+}
+
+.arrows button svg path {
+  fill: var(--white);
+  transition: fill 0.5s ease;
+  -webkit-transition: fill 0.5s ease;
+  -moz-transition: fill 0.5s ease;
+  -ms-transition: fill 0.5s ease;
+  -o-transition: fill 0.5s ease;
+}
+
+.arrows button:hover svg path {
+  fill: var(--font-gold);
 }
 
 .sr-only {

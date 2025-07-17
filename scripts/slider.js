@@ -1,4 +1,4 @@
-export function initSlider(sliderId, config = {}) {
+export function initSlider(sliderId, sliderContainerId, config = {}) {
   const {
     slideWidth = 1000,
     autoplay = false,
@@ -6,14 +6,15 @@ export function initSlider(sliderId, config = {}) {
   } = config;
 
   const slider = document.getElementById(sliderId);
+  const sliderContainer = document.getElementById(sliderContainerId);
   if (!slider) return;
 
   const view = slider.querySelector('.slider-view');
   const slides = slider.querySelectorAll('.slider-view-slide');
-  const thumbs = slider.querySelectorAll('.thumbs span');
-  const currentSlideText = slider.querySelector('#current-slide');
-  const prevBtn = slider.querySelector('#slider-prev');
-  const nextBtn = slider.querySelector('#slider-next');
+  const thumbs = sliderContainer.querySelectorAll('.thumbs span');
+  const currentSlideText = sliderContainer.querySelector('#current-slide');
+  const prevBtn = sliderContainer.querySelector('#slider-prev');
+  const nextBtn = sliderContainer.querySelector('#slider-next');
 
   let current = 0;
   const total = slides.length;

@@ -1,4 +1,8 @@
 /* desktop.css */
 @media (min-width: 1024px) {
   /* Add desktop-specific styles here if needed */
+
+  #welcome-slider::after {
+    background: linear-gradient(90deg, var(--bg-dark) 0%, var(--bg-dark50) 16%, #00000000 31%);
+  }
 }
