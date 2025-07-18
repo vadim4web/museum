@@ -68,6 +68,50 @@
     height: 120px;
   }
 
+  h2 {
+    font-size: 80px;
+    line-height: 90px;
+    letter-spacing: 5px;
+  }
+
+  h2::after {
+    top: 115px;
+  }
+
+  #visiting {
+    padding-block: 75px;
+  }
+
+  .visiting-grid {
+    padding-top: 100px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 60px;
+  }
+
+  .visiting-grid .visual-item {
+    margin-bottom: 15px;
+  }
+
+  .visual-item h3 {
+    padding-top: 25px;
+    font-size: 32px;
+    letter-spacing: 5px;
+    line-height: 35px;
+  }
+
+  .visual-item p:first-of-type {
+    padding-top: 22px;
+    font-size: 22px;
+    line-height: 26px;
+  }
+
+  .visual-item p:last-of-type {
+    padding-top: 10px;
+    font-size: 18px;
+    line-height: 21px;
+  }
+
   footer {
     font-size: 22px;
   }

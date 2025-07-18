@@ -123,7 +123,7 @@ footer {
   background: var(--font-gold);
 }
 
-#welcome .content {
+.content {
   position: relative;
   height: 100%;
 }
@@ -244,6 +244,98 @@ footer {
 
 .arrows button:hover svg path {
   fill: var(--font-gold);
+}
+
+h2 {
+  font-weight: 400;
+}
+
+#visiting h2,
+#video h2,
+#tickets h2,
+#contacts h2 {
+  color: var(--font-gold);
+}
+
+#explore h2,
+#gallery h2 {
+  color: var(--white);
+}
+
+#visiting h2,
+#explore h2,
+#tickets h2,
+#contacts h2 {
+  position: relative;
+}
+
+#visiting h2::after,
+#explore h2::after,
+#tickets h2::after,
+#contacts h2::after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 3px;
+  background: var(--dark-red);
+  left: 0;
+}
+
+.visiting-grid {
+  display: grid;
+  width: 100%;
+}
+
+.visiting-grid .visual-item img {
+  width: 100%;
+}
+
+.visual-item h3 {
+  position: relative;
+}
+
+.visual-item h3::after {
+  position: absolute;
+  content: "";
+  width: 67.5%;
+  height: 3px;
+  background: var(--dark-red);
+  left: 0;
+  bottom: -10px;
+  transition: none;
+  animation-fill-mode: forwards;
+}
+
+/* Hover animation (forward motion) */
+@keyframes stratching-in {
+  0% { width: 67.5%; }
+  16.75% { width: 100%; }
+  67.5% { width: 0; }
+  100% { width: 67.5%; }
+}
+
+/* Leave animation (return to base state) */
+@keyframes stratching-out {
+  from { width: 0; }
+  to { width: 67.5%; }
+}
+
+.visual-item:hover h3::after {
+  animation: stratching-in 2s infinite linear;
+  -webkit-animation: stratching-in 2s infinite linear;
+}
+
+.visual-item:not(:hover) h3::after {
+  animation: stratching-out 0.5s linear;
+  -webkit-animation: stratching-out 0.5s linear;
+}
+
+h3.in::after {
+  animation: stratching-in 2s linear forwards;
+}
+
+h3.out::after {
+  animation: stratching-out 0.5s ease forwards;
 }
 
 footer {
