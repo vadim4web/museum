@@ -153,7 +153,31 @@
     </section>
     <section id="explore">
       <div class="content">
-        <h2>Picture explore</h2>
+        <div class="text">
+          <h2>Picture explore</h2>
+
+          <p>
+            Las Meninas is a 1656 painting by Diego Velázquez, the leading artist of the Spanish Golden Age.
+          </p>
+
+          <p>
+            It was cleaned in 1984 to remove a <span class="text-gold">"yellow veil"</span> of dust that had gathered since the previous restoration in the 19th century.
+          </p>
+
+          <p>
+            The cleaning provoked furious protests, not because the picture had been damaged in any way, but because it looked different.
+          </p>
+        </div>
+
+        <div class="picture" id="las-meninas">
+          <img src="assets/images/explore/las-meninas.png" alt="Las Meninas by Diego Velázquez" class="base">
+          <div class="ace">
+            <div id="sliding">
+              &nbsp;
+            </div>
+            <img src="assets/images/explore/slide.png" alt="Slide" class="slide">
+          </div>
+        </div>
       </div>
     </section>
     <section id="video">
@@ -317,27 +341,36 @@
 
   <script type="module">
     import { initSlider } from './scripts/slider.js';
-    import { initUnderlineAnimation } from './scripts/underline-animation.js';
 
     function setSize() {
       document.getElementById('dev').innerText = window.innerWidth + 'x' + window.innerHeight;
     }
 
-    window.onload = () => {
+    window.onload = async () => {
       setSize();
 
-      // Initialize slider
+      // Initialize slider immediately
       initSlider('welcome-slider', 'welcome-slider-container', {
         slideWidth: 1000,
         autoplay: true,
         interval: 5000
       });
 
-      // Initialize underline animation
-      initUnderlineAnimation();
+      // Lazy load underline animation if visual items exist
+      if (document.querySelector('.visual-item')) {
+        const { initUnderlineAnimation } = await import('./scripts/underline-animation.js');
+        initUnderlineAnimation();
+      }
+
+      // Lazy load sliding effect if the #explore picture section is present
+      if (document.querySelector('#explore .picture')) {
+        const { initSlidingEffect } = await import('./scripts/sliding-effect.js');
+        initSlidingEffect('#explore .picture');
+      }
     };
 
     window.addEventListener('resize', setSize);
   </script>
+
 </body>
 </html>

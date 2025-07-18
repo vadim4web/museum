@@ -112,6 +112,39 @@
     line-height: 21px;
   }
 
+  #explore {
+    padding-block: 75px;
+  }
+
+  #explore .content {
+    display: grid;
+    grid-template-columns: 660px 720px;
+    gap: 60px;
+  }
+
+  #explore .content .text p {
+    font-size: 22px;
+    font-weight: 300;
+  }
+
+  #explore .content .text p:first-of-type {
+    padding-top: 103px;
+  }
+
+  #explore .content .text p:not(:first-of-type) {
+    padding-top: 25px;
+  }
+
+  #explore .content .picture {
+    top: 15px;
+  }
+
+  #explore .picture,
+  #explore .picture .ace #sliding img {
+    width: 720px;
+    height: 700px;
+  }
+
   footer {
     font-size: 22px;
   }
