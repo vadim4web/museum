@@ -29,27 +29,35 @@ export function initVideoControls() {
     const timeline = controls.querySelector('.timeline');
     const fullscreenBtn = controls.querySelector('[data-action="fullscreen"]');
 
-    // Parse and validate saved volume
-    let saved = parseFloat(localStorage.getItem('videoVolume'));
-    let initialVolume = Number.isFinite(saved) && saved >= 0 && saved <= 1 ? saved : 0.5;
+    // Restore saved volume and mute state
+    let savedVolume = parseFloat(localStorage.getItem('videoVolume'));
+    let savedMuted = localStorage.getItem('videoMuted') === 'true';
 
-    // Apply volume
+    let initialVolume = Number.isFinite(savedVolume) && savedVolume >= 0 && savedVolume <= 1 ? savedVolume : 0.5;
+
     video.volume = initialVolume;
-    video.muted = initialVolume === 0;
+    video.muted = savedMuted || initialVolume === 0;
+
     if (volumeRange) {
       volumeRange.value = initialVolume.toFixed(2);
       updateRangeFill(volumeRange);
     }
-    if (volumeIndicator) volumeIndicator.textContent = `${Math.round(initialVolume * 100)}%`;
-    if (muteBtn) setIcon(muteBtn, video.muted ? 'icon-mute' : 'icon-volume');
 
-    // Set initial timeline fill if possible
+    if (volumeIndicator) {
+      volumeIndicator.textContent = `${Math.round(initialVolume * 100)}%`;
+    }
+
+    if (muteBtn) {
+      setIcon(muteBtn, video.muted ? 'icon-mute' : 'icon-volume');
+    }
+
+    // Set timeline fill to 0
     if (timeline) {
       timeline.value = 0;
       updateRangeFill(timeline);
     }
 
-    // Play/pause
+    // Play/pause logic
     toggleBtn.addEventListener('click', () => {
       video.paused ? video.play() : video.pause();
     });
@@ -59,7 +67,9 @@ export function initVideoControls() {
 
     video.addEventListener('play', () => {
       setIcon(toggleBtn, 'icon-pause');
-      if (video.muted && video.volume > 0) video.muted = false;
+      if (video.muted && video.volume > 0) {
+        video.muted = false;
+      }
       videoBlock.dataset.paused = "false";
     });
 
@@ -68,13 +78,44 @@ export function initVideoControls() {
       videoBlock.dataset.paused = "true";
     });
 
-    // Mute/unmute
+    // Mute/unmute toggle
     muteBtn.addEventListener('click', () => {
-      video.muted = !video.muted;
-      setIcon(muteBtn, video.muted ? 'icon-mute' : 'icon-volume');
+      if (video.muted || video.volume === 0) {
+        // Restore previous or default volume
+        let restoredVolume = parseFloat(localStorage.getItem('videoVolume')) || 0.5;
+        restoredVolume = Math.min(Math.max(restoredVolume, 0.01), 1);
+        video.volume = restoredVolume;
+        video.muted = false;
+
+        volumeRange.value = restoredVolume.toFixed(2);
+        updateRangeFill(volumeRange);
+
+        if (volumeIndicator) {
+          volumeIndicator.textContent = `${Math.round(restoredVolume * 100)}%`;
+        }
+
+        localStorage.setItem('videoVolume', restoredVolume.toFixed(2));
+        localStorage.setItem('videoMuted', 'false');
+        setIcon(muteBtn, 'icon-volume');
+      } else {
+        // Mute and set volume to 0
+        video.volume = 0;
+        video.muted = true;
+
+        volumeRange.value = '0';
+        updateRangeFill(volumeRange);
+
+        if (volumeIndicator) {
+          volumeIndicator.textContent = `0%`;
+        }
+
+        localStorage.setItem('videoVolume', '0');
+        localStorage.setItem('videoMuted', 'true');
+        setIcon(muteBtn, 'icon-mute');
+      }
     });
 
-    // Volume change
+    // Volume input handler
     volumeRange.addEventListener('input', () => {
       let vol = parseFloat(volumeRange.value);
       if (!Number.isFinite(vol)) vol = 0.5;
@@ -82,21 +123,19 @@ export function initVideoControls() {
 
       video.volume = vol;
       video.muted = vol === 0;
+
       localStorage.setItem('videoVolume', vol.toFixed(2));
+      localStorage.setItem('videoMuted', video.muted.toString());
 
       updateRangeFill(volumeRange);
 
       if (volumeIndicator) {
         volumeIndicator.textContent = `${Math.round(vol * 100)}%`;
 
-        // Position indicator using % (excluding 30px left/right margins)
         const container = volumeRange.closest('.volume-container');
         const containerWidth = container.offsetWidth;
-        const usableWidth = containerWidth - 60; // exclude 30px left & right
-
-        const percentX = vol; // volume is 0–1
-        const offsetX = 15 + usableWidth * percentX;
-
+        const usableWidth = containerWidth - 60;
+        const offsetX = 15 + usableWidth * vol;
         const percentLeft = (offsetX / containerWidth) * 100;
         volumeIndicator.style.left = `${percentLeft}%`;
 
@@ -112,7 +151,7 @@ export function initVideoControls() {
       }
     });
 
-    // Accessibility (focus/blur)
+    // Accessibility
     volumeRange.addEventListener('focus', () => {
       volumeIndicator?.classList.add('visible');
     });
@@ -132,7 +171,7 @@ export function initVideoControls() {
       updateRangeFill(timeline);
     });
 
-    // Fullscreen
+    // Fullscreen toggle
     fullscreenBtn.addEventListener('click', () => {
       if (!document.fullscreenElement) {
         video.requestFullscreen?.();
@@ -141,7 +180,7 @@ export function initVideoControls() {
       }
     });
 
-    // Auto-hide UI logic
+    // Auto-hide controls
     setupAutoHideControls(videoBlock);
   });
 }
